@@ -23,7 +23,7 @@ var level1 = {
         {"x":4, "y":11}
     ],
     "wave": [
-        {"type": "enemy1", "count": 20}
+        {"type": "enemy1", "count": 2}
     ]
 };
 
@@ -157,7 +157,13 @@ var Base = function() {
         for(var index in level1.path) {
             if(index == 0 && oldx == undefined && oldy == undefined) {
                 var zone = public.getZone(level1.path[index].x, level1.path[index].y);
-                zone.activePath();
+                var pathIndex = public.getZoneIndex(level1.path[index].x, level1.path[index].y);
+                
+                if(pathIndex != private.path[private.path.length - 1]) {
+                    private.path.push(pathIndex);
+                    zone.activePath();
+                    zone.setPathIndex(pathIndex);
+                }
             } else {
                 if(level1.path[index].x != oldx) {
                     var zone = private.generatePathLine(level1.path[index], 'x', oldx);
@@ -183,12 +189,17 @@ var Base = function() {
             for(var i = old; i <=  looper; i++) {
                 if(ref == 'x') {
                     var zone = public.getZone(i, path.y);
-                    private.path.push(public.getZoneIndex(i, path.y));
+                    var pathIndex = public.getZoneIndex(i, path.y);
                 } else {
                     var zone = public.getZone(path.x, i);
-                    private.path.push(public.getZoneIndex(path.x, i));
+                    var pathIndex = public.getZoneIndex(path.x, i);
                 }
-                zone.activePath();
+                
+                if(pathIndex != private.path[private.path.length - 1]) {
+                    private.path.push(pathIndex);
+                    zone.activePath();
+                    zone.setPathIndex(pathIndex);
+                }
             }
         } else if(old > looper) {
             for(var i = old; i >=  looper; i--) {
@@ -201,9 +212,12 @@ var Base = function() {
                     var zone = public.getZone(path.x, i);
                     var pathIndex = public.getZoneIndex(path.x, i);
                 }
-                private.path.push(pathIndex);
-                zone.activePath();
-                zone.setPathIndex(pathIndex);
+                
+                if(pathIndex != private.path[private.path.length - 1]) {
+                    private.path.push(pathIndex);
+                    zone.activePath();
+                    zone.setPathIndex(pathIndex);
+                }
             }
         }
         return zone;
