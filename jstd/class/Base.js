@@ -3,7 +3,7 @@ const TILE_H = 15;
 const TILE_W = 15;
 const MAP_H = 11;
 const MAP_W = 11; 
-const TICK_INTERVAL = 1000; 
+const TICK_INTERVAL = 250; 
 
 var Base = function() {
     var public = {};
@@ -24,27 +24,48 @@ var Base = function() {
         private.levels = levels;
     };
 
+    // public.start = function() {
+
+    // };
+
     public.startNextLevel = function() {
-        console.log(private.levels[private.currentLevel + 1], private.currentLevel);
+        console.log('startNextLevel');
         if(private.levels[private.currentLevel + 1] !== undefined) {
             private.currentLevel++;
-            console.log(private.currentLevel);
+            console.log('start level ' + private.currentLevel);
             private.generateZones();
             private.generateTowers();
             private.generatePath();
             private.generateWave();
         } else {
             console.log('levels finish');
+            private.currentLevel = 0;
+            private.generateZones();
+            private.generateTowers();
+            private.generatePath();
+            private.generateWave();
         }
+        //TD.start();
     };
 
     private.generateTowers = function() {
-        public.towers = [];
-        for(var index in private.levels[private.currentLevel].towers) {
-            var tower = public.newTowerByType(private.levels[private.currentLevel].towers[index].type);
-            tower.setId('tower-' + public.towers.length);
-            public.towers.push(tower);
-            $towerzone.append(tower.get());
+        //public.towers = [];
+        if(public.towers.length <= 0) {
+            for(var index in private.levels[private.currentLevel].towers) {
+                var tower = public.newTowerByType(private.levels[private.currentLevel].towers[index].type);
+                tower.setId('tower-' + public.towers.length);
+                public.towers.push(tower);
+                $towerzone.append(tower.get());
+            }
+        } else {
+            for(var index in private.levels[private.currentLevel].towers) {
+                var tower = public.getTowerByType(private.levels[private.currentLevel].towers[index].type);
+                if(tower == false) {
+                    tower.setId('tower-' + public.towers.length);
+                    public.towers.push(tower);
+                    $towerzone.append(tower.get());
+                }
+            }
         }
     };
 
@@ -66,7 +87,7 @@ var Base = function() {
     };
 
     private.generateWave = function() {
-        public.wave = [];
+        //public.wave = [];
         for(var index in private.levels[private.currentLevel].wave) {
             for(var i = 0; i < private.levels[private.currentLevel].wave[index].count; i++) {
                 var unit = public.newUnitByType(private.levels[private.currentLevel].wave[index].type);
@@ -79,7 +100,6 @@ var Base = function() {
 
     private.refreshZone = function(i,j) {
         var zone = public.getZone(i, j);
-        console.log(zone);
         zone.refresh();
     };
 
@@ -146,6 +166,15 @@ var Base = function() {
         };
 
         return tower;
+    };
+
+    public.getTowerByType = function(type) {
+        for(var index in public.towers) {
+            if(type == public.towers[index].type) {
+                return public.towers[index];
+            }
+        }
+        return false;
     };
 
     public.newUnitByType = function(type) {

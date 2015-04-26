@@ -47,7 +47,7 @@ $(document).ready(function() {
     TD.init([level1,level2]);
 
     $('#play').on('click', function() {
-        TD.startNextLevel();
+        TD.start();
     });
 
     $('#pause').on('click', function() {
