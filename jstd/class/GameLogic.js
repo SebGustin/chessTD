@@ -8,7 +8,7 @@ var GameLogic = function(){
     
     base.start = function() {        
         /* ... */
-
+        base.startNextLevel();
         if (!base.gameLoop) {
             var me = base;
             me.gameLoop = setInterval(function() {

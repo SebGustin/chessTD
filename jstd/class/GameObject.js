@@ -16,6 +16,10 @@ var GameObject = function() {
         private.element.addClass(classname);
     };
 
+    public.removeClass = function(classname) {
+        private.element.removeClass(classname);
+    };
+
     public.setText = function(text) {
         private.element.html(text);
     };

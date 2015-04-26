@@ -23,6 +23,13 @@ var Zone = function() {
         gameObject.setId('zone-' + x + '-' + y);
     };
 
+    public.refresh = function() {
+        private.empty = true;
+        private.path = false;
+        private.pathIndex = undefined;
+        gameObject.removeClass('zonepath');
+    };
+
     public.get = function() {
         return gameObject.get();
     };

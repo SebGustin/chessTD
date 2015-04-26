@@ -6,12 +6,48 @@
 var currentDrag = undefined;
 var TD = undefined;
 
+var level1 = {
+    "towers" : [
+        {"type": "basic"},
+        {"type": "air"}
+    ],
+    "path": [
+        {"x":0, "y":0},
+        {"x":11, "y":0},
+        {"x":11, "y":4},
+        {"x":3, "y":4},
+        {"x":3, "y":3},
+        {"x":1, "y":3},
+        {"x":1, "y":7},
+        {"x":10, "y":7},
+        {"x":10, "y":9},
+        {"x":4, "y":9},
+        {"x":4, "y":11}
+    ],
+    "wave": [
+        {"type": "enemy1", "count": 2}
+    ]
+};
+
+var level2 = {
+    "towers" : [
+        {"type": "basic"}
+    ],
+    "path": [
+        {"x":6, "y":0},
+        {"x":6, "y":11}
+    ],
+    "wave": [
+        {"type": "enemy1", "count": 1}
+    ]
+};
+
 $(document).ready(function() {
     TD = new GameLogic();
-    TD.init();
+    TD.init([level1,level2]);
 
     $('#play').on('click', function() {
-        TD.start();
+        TD.startNextLevel();
     });
 
     $('#pause').on('click', function() {

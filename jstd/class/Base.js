@@ -5,29 +5,6 @@ const MAP_H = 11;
 const MAP_W = 11; 
 const TICK_INTERVAL = 1000; 
 
-var level1 = {
-    "towers" : [
-        {"type": "basic"},
-        {"type": "air"}
-    ],
-    "path": [
-        {"x":0, "y":0},
-        {"x":11, "y":0},
-        {"x":11, "y":4},
-        {"x":3, "y":4},
-        {"x":3, "y":3},
-        {"x":1, "y":3},
-        {"x":1, "y":7},
-        {"x":10, "y":7},
-        {"x":10, "y":9},
-        {"x":4, "y":9},
-        {"x":4, "y":11}
-    ],
-    "wave": [
-        {"type": "enemy1", "count": 2}
-    ]
-};
-
 var Base = function() {
     var public = {};
     var private = {};
@@ -35,22 +12,36 @@ var Base = function() {
     var $mapzone = $('#mapzone');
     var $towerzone = $('#towerzone');
 
+    private.levels = [];
+    private.currentLevel = -1;
     public.zones = [];
     public.towers = [];
     public.wave = [];
     private.path = [];
     public.gameLoop = undefined;
 
-    public.init = function() {
-        private.generateZones();
-        private.generateTowers();
-        private.generatePath();
-        private.generateWave();
+    public.init = function(levels) {
+        private.levels = levels;
+    };
+
+    public.startNextLevel = function() {
+        console.log(private.levels[private.currentLevel + 1], private.currentLevel);
+        if(private.levels[private.currentLevel + 1] !== undefined) {
+            private.currentLevel++;
+            console.log(private.currentLevel);
+            private.generateZones();
+            private.generateTowers();
+            private.generatePath();
+            private.generateWave();
+        } else {
+            console.log('levels finish');
+        }
     };
 
     private.generateTowers = function() {
-        for(var index in level1.towers) {
-            var tower = public.newTowerByType(level1.towers[index].type);
+        public.towers = [];
+        for(var index in private.levels[private.currentLevel].towers) {
+            var tower = public.newTowerByType(private.levels[private.currentLevel].towers[index].type);
             tower.setId('tower-' + public.towers.length);
             public.towers.push(tower);
             $towerzone.append(tower.get());
@@ -58,18 +49,27 @@ var Base = function() {
     };
 
     private.generateZones = function() {
-        public.zones = [];
-        for(var j=0 ; j<=MAP_W ; j++) {
-            for(var i=0 ; i<=MAP_H ; i++) {
-                private.generateZone(i,j);
+        if(public.zones.length <= 0) {
+            for(var j=0 ; j<=MAP_W ; j++) {
+                for(var i=0 ; i<=MAP_H ; i++) {
+                    private.generateZone(i,j);
+                }
             }
-        }
+        } else {
+            for(var j=0 ; j<=MAP_W ; j++) {
+                for(var i=0 ; i<=MAP_H ; i++) {
+                    private.refreshZone(i,j);
+                }
+            }
+        }  
+        
     };
 
     private.generateWave = function() {
-        for(var index in level1.wave) {
-            for(var i = 0; i < level1.wave[index].count; i++) {
-                var unit = public.newUnitByType(level1.wave[index].type);
+        public.wave = [];
+        for(var index in private.levels[private.currentLevel].wave) {
+            for(var i = 0; i < private.levels[private.currentLevel].wave[index].count; i++) {
+                var unit = public.newUnitByType(private.levels[private.currentLevel].wave[index].type);
                 unit.setId('unit-' + public.wave.length);
                 public.wave.push(unit);            
             }
@@ -77,7 +77,11 @@ var Base = function() {
         }
     };
 
-
+    private.refreshZone = function(i,j) {
+        var zone = public.getZone(i, j);
+        console.log(zone);
+        zone.refresh();
+    };
 
     private.generateZone = function(i,j) {
         var zone = new Zone();
@@ -155,10 +159,11 @@ var Base = function() {
     private.generatePath = function() {
         var oldx = undefined;
         var oldy = undefined;
-        for(var index in level1.path) {
+        private.path = [];
+        for(var index in private.levels[private.currentLevel].path) {
             if(index == 0 && oldx == undefined && oldy == undefined) {
-                var zone = public.getZone(level1.path[index].x, level1.path[index].y);
-                var pathIndex = public.getZoneIndex(level1.path[index].x, level1.path[index].y);
+                var zone = public.getZone(private.levels[private.currentLevel].path[index].x, private.levels[private.currentLevel].path[index].y);
+                var pathIndex = public.getZoneIndex(private.levels[private.currentLevel].path[index].x, private.levels[private.currentLevel].path[index].y);
                 
                 if(pathIndex != private.path[private.path.length - 1]) {
                     private.path.push(pathIndex);
@@ -166,10 +171,10 @@ var Base = function() {
                     zone.setPathIndex(pathIndex);
                 }
             } else {
-                if(level1.path[index].x != oldx) {
-                    var zone = private.generatePathLine(level1.path[index], 'x', oldx);
-                } else if(level1.path[index].y != oldy) {
-                    var zone = private.generatePathLine(level1.path[index], 'y', oldy);
+                if(private.levels[private.currentLevel].path[index].x != oldx) {
+                    var zone = private.generatePathLine(private.levels[private.currentLevel].path[index], 'x', oldx);
+                } else if(private.levels[private.currentLevel].path[index].y != oldy) {
+                    var zone = private.generatePathLine(private.levels[private.currentLevel].path[index], 'y', oldy);
                 } else {
                     console.log('what else !');
                 }
