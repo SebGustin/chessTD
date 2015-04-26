@@ -36,7 +36,7 @@ var GameLogic = function(){
 
     base.tick = function() {
         /* ... */
-        console.log('tick', base.wave);
+        //console.log('tick', base.wave);
         if(base.wave.length > 0) {
             if(private.iteration < base.wave.length) {
                 private.iteration++;

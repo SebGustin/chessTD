@@ -41,7 +41,9 @@ var Unit = function() {
     public.move = function(zone, pathIndex) {
         if(private.engaged && !private.dead) {
             if(zone.isPath()) {
-                zone.get().append(gameObject.get());
+                //console.log([zone.getX(), zone.getY()]);
+                //zone.get().append(gameObject.get());
+                gameObject.move(zone.getX(), zone.getY());
                 zone.setPathIndex(pathIndex);
                 private.zone = zone;
             }
@@ -59,6 +61,7 @@ var Unit = function() {
     public.engage = function(zone, pathIndex) {
         if(!private.engaged && !private.dead) {
             private.engaged = true;
+            zone.get().append(gameObject.get());
             public.move(zone, pathIndex);
         } 
     };

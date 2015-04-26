@@ -200,4 +200,7 @@ body {
     text-align: center;
     margin: 10px;
     position: absolute;
+    z-index: 1;
+    -webkit-transition: left 1s linear, top 1s linear; /* Safari */
+    transition: left 1s linear, top 1s linear;
 }

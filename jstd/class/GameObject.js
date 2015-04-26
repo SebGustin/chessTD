@@ -40,5 +40,13 @@ var GameObject = function() {
         private.element.append(element);
     };
 
+    public.move = function(x, y) {
+        private.element.css({
+            left: (x * TILE_H),
+            top: (y * TILE_W)
+        });
+        //console.log(x, y, TILE_H, TILE_W);
+    };
+
     return public;
 }

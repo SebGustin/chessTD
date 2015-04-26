@@ -25,7 +25,7 @@ var level1 = {
         {"x":4, "y":11}
     ],
     "wave": [
-        {"type": "enemy1", "count": 2}
+        {"type": "enemy1", "count": 5}
     ]
 };
 

@@ -1,9 +1,9 @@
 // constants
-const TILE_H = 15;
-const TILE_W = 15;
+const TILE_H = 50;
+const TILE_W = 50;
 const MAP_H = 11;
 const MAP_W = 11; 
-const TICK_INTERVAL = 250; 
+const TICK_INTERVAL = 1000; 
 
 var Base = function() {
     var public = {};
@@ -279,6 +279,7 @@ var Base = function() {
             }
         } else {
             unit.engage(public.zones[private.path[0]], private.path[0]);
+            $mapzone.prepend(unit.get());
         }
         
     };
