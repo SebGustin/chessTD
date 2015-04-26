@@ -1,0 +1,200 @@
+::-moz-selection,
+::selection {
+    background : transparent;
+}
+
+span {
+    display: block;
+}
+
+html {
+    background: #333;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+
+#frame, #mapzone, #ctrlzone, #lifezone, #buttonzone, #moneyzone, #towerzone {
+    position:absolute;
+    box-sizing: border-box;
+}
+
+#frame {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 30px auto;
+    border:solid 1px #fff;
+}
+
+#mapzone {
+    width: 600px;
+    left: 0;
+    top:0;
+    bottom:0;
+    background: rgba(255, 255, 255, 0.3);
+    font-size: 0;
+}
+
+#mapzone .tower {
+    position:absolute;
+    width: 50px;
+    height: 50px;
+    margin:0;
+    font-size: 48px;
+    line-height: 48px;
+}
+
+#mapzone .tower::before {
+    content:"";
+}
+
+#mapzone .zone {
+    position:relative;
+    display: inline-block;
+    width:50px;
+    height: 50px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+}
+
+#mapzone .zonepath {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: inherit;
+}
+
+#ctrlzone {
+    width: 200px;
+    right: 0;
+    top:0;
+    bottom:0;
+    background: rgba(0, 128, 255, 0.3);
+    color: #ccc;
+}
+
+#lifezone {
+    width: 100%;
+    height:20px;
+    background: rgba(0, 0, 0, 0.3);
+    top:0;
+}
+
+#lifezone .lifezonebar {
+    width: 50%;
+    height:20px;
+    background: rgba(128, 128, 0, 0.5);
+    top:0;
+}
+
+#buttonzone {
+    width: 100%;
+    padding: 5px;
+    bottom:0;
+    height: 100px;
+}
+
+.button {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    padding: 5px 20px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 5px;
+}
+
+.button:hover {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.button:active {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.3) inset;
+}
+
+#moneyzone {
+    position:relative;
+    width: 100%;
+    top:20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    text-align: right;
+    padding-right: 30px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 1);
+}
+
+#moneyzone::before {
+    content:"$";
+    position:absolute;
+    right:10px;
+}
+
+#towerzone {
+    width: 100%;
+    padding: 10px;
+    top: 40px;
+    bottom: 100px;
+    box-shadow: 0 0 20px rgba(0, 128, 255, 0.5) inset;
+}
+
+.tower {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin: 15px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.tower::before {
+    position:absolute;
+    bottom: -20px;
+    font-size: 14px;
+    text-align:center;
+    left:0;
+    right:0;
+    text-shadow: 2px 2px rgba(0, 0, 0, 1);
+}
+
+.tower.dragging::before {
+    content:"";
+}
+
+.towerinactive {
+    opacity:0.1;
+    cursor: default;
+}
+
+.towerbasic {
+/*    border-radius: 50px;
+    box-shadow: 0 0 20px rgba(128, 50, 50, 1) inset;*/
+}
+
+.towerbasic::before {
+    content: "100";
+}
+
+#mapzone .towerbasic {
+
+}
+
+.towerair {
+/*    box-shadow: 0 0 20px rgba(50, 230, 230, 1) inset;*/
+}
+
+.towerair::before {
+    content: "200";
+}
+
+.enemy {
+    width:30px;
+    height: 30px;
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    margin: 10px;
+    position: absolute;
+}

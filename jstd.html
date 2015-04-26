@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://threecube.sectorsoftware.net/ -->
+<html>
+    <head>
+    <base href="http://seb.com:8888/jsTD/">
+    <script id="tinyhippos-injected">
+    if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }
+    </script>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Tower Defense</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="jstd/css/td.css" type="text/css">
+
+</head>
+<body cz-shortcut-listen="true">
+    <div id="frame">
+        <span id="mapzone" class="mapzone">
+
+        </span>
+        <span id="ctrlzone" class="ctrlzone">
+            <span id="lifezone" class="lifezone"><span class="lifezonebar"></span></span>
+            <span id="moneyzone" class="moneyzone">1000</span>
+            <span id="towerzone" class="towerzone"></span>
+            <span id="buttonzone">
+                <span id="play" class="button">play</span>
+                <span id="pause" class="button">pause</span>
+            </span>
+        </span>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="jstd/class/MazeStrategy.js"></script>
+    <script type="text/javascript" src="jstd/class/Base.js"></script>
+    <script type="text/javascript" src="jstd/class/GameLogic.js"></script>
+    <script type="text/javascript" src="jstd/class/GameObject.js"></script>
+    <script type="text/javascript" src="jstd/class/Zone.js"></script>
+
+    <script type="text/javascript" src="jstd/class/Tower.js"></script>
+    <script type="text/javascript" src="jstd/class/towers/Basic.js"></script> 
+    <script type="text/javascript" src="jstd/class/towers/Air.js"></script>    
+    <script type="text/javascript" src="jstd/class/towers/Flak.js"></script>
+
+    <script type="text/javascript" src="jstd/class/Shot.js"></script>
+    <script type="text/javascript" src="jstd/class/Airshot.js"></script>
+
+    <script type="text/javascript" src="jstd/class/Unit.js"></script>
+    <script type="text/javascript" src="jstd/class/units/Enemy1.js"></script>
+
+    <script type="text/javascript" src="jstd/app.js"></script>
+    <!-- <script type="text/javascript" src="./jstd/towerdefense.js"></script> -->
+</body>
+</html>
