@@ -8,7 +8,7 @@ var AirTower = function() {
     private.animationDelay = 200;
     private.range          = 5;
     private.shotType       = 1;
-    private.code           = '&#9815;';
+    private.code           = '&#9821';
     private.sprite         = '';
 
     tower.init(private.speed, private.animationDelay, private.range, private.shotType, private.code);

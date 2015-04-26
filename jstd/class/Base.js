@@ -3,6 +3,7 @@ const TILE_H = 15;
 const TILE_W = 15;
 const MAP_H = 11;
 const MAP_W = 11; 
+const TICK_INTERVAL = 1000; 
 
 var level1 = {
     "towers" : [

@@ -13,7 +13,7 @@ var GameLogic = function(){
             var me = base;
             me.gameLoop = setInterval(function() {
                 me.tick();
-            }, 250);    
+            }, TICK_INTERVAL);    
         }
     };
 
